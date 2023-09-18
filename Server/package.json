@@ -13,8 +13,8 @@
   "description": "Perform CRUD operations on to do list tasks",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon .",
-    "prod": "node . ",
+    "start": "node .",
+    "prod": "nodemon . ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Hari Shah",
