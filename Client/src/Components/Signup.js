@@ -2,6 +2,7 @@ import React, {useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTask } from '../Context/TaskStates';
 export default function Signup() {
+  const host = process.env.REACT_APP_HOST;
     const [creds, setCreds] = useState({name: "" , email:"" , password: ""});
     const [time, setTime] = useState(2);
     let navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function Signup() {
     const handleSubmit = async(e)=>
     {
         e.preventDefault();
-        const Login = await fetch("http://localhost:4000/user/createuser", {
+        const Login = await fetch(`${host}/user/createuser`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

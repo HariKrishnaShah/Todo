@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTask } from '../Context/TaskStates';
 export default function Login() {
+  const host = process.env.REACT_APP_HOST;
     const [creds, setCreds] = useState({email:"" , password: ""});
     const  [time, setTime] = useState(2);
     let navigate = useNavigate();
@@ -13,7 +14,7 @@ export default function Login() {
     const handleSubmit = async(e)=>
     {
         e.preventDefault();
-        const Login = await fetch("http://localhost:4000/user/login", {
+        const Login = await fetch(`${host}/user/login`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -6,6 +6,7 @@ export default function TaskStates(props) {
     const authToken = localStorage.getItem('token');
     const[toast, setToast] = useState();
     const[tasks, setTasks] = useState();
+    const[loading, setLoading] = useState(true);
     const payload = {headers:{"authToken":authToken, "Content-Type": "application/json"}}
 
     
@@ -26,15 +27,19 @@ export default function TaskStates(props) {
 
 //Fetch all tasks
 const fetchTask = async()=>{
+    setLoading(true);
     let {data} = await axios.get(`${host}/task/viewtasks`, payload);
     setTasks(data);
+    setLoading(false);
 }
 
 
 // Add tasks
 
 const taskadd = async(newtask)=>{
+    setLoading(true);
     let {data} = await axios.post(`${host}/task/addtask`, newtask, payload);
+    setLoading(false);
     return (data);
     
 }
@@ -42,7 +47,9 @@ const taskadd = async(newtask)=>{
 // Add Subtask
 
 const subtaskAdd = async(subtask)=>{
+    setLoading(true);
     let {data} = await axios.post(`${host}/subtask/addsubtask`, subtask, payload);
+    setLoading(false);
     return data;
 }
 
@@ -50,11 +57,14 @@ const subtaskAdd = async(subtask)=>{
 // Update Subtask
 const subtaskUpdate = async(subtaskid)=>
 {
+    setLoading(true);
     await axios.put(`${host}/subtask/updatesubtask`, {subtaskid}, payload);
+    setLoading(false);
 }
 
     //Delete Subtask //yet to correct
     const deletesubtask = async (subtaskid, taskid)=>{
+        setLoading(true);
         await axios.delete(`${host}/subtask/deletesubtask`, {...payload, data:{subtaskid:subtaskid}});
         let newtask = JSON.parse(JSON.stringify(tasks));
         let taskindex =0;
@@ -76,20 +86,23 @@ const subtaskUpdate = async(subtaskid)=>
             if (newtask.length > 0) {
             newtask[taskindex].subtasks.splice(subtaskindex, 1);
           }
-        setTasks(newtask);   
+        setTasks(newtask);
+        setLoading(false);   
     }
 
     //Update Task
 
     const taskupdate = async(taskid, task)=>{
+        setLoading(true);
         await axios.put(`${host}/task/updatetask`, {taskid}, payload);
     for(let subtask of task.subtasks)
     {
         await axios.put(`${host}/subtask/updatesubtask`, {subtaskid:subtask._id, markasdone:"yes"}, payload);
     }
+    setLoading(false);
     }
   return (
-    <TaskContext.Provider value = {{triggerToast, toast, closeToast, tasks, setTasks, deletesubtask, fetchTask, taskadd, subtaskUpdate, subtaskAdd, taskupdate}} >
+    <TaskContext.Provider value = {{triggerToast, toast, closeToast, tasks, setTasks, deletesubtask, fetchTask, taskadd, subtaskUpdate, subtaskAdd, taskupdate, setLoading, loading}} >
     {props.children}
     </TaskContext.Provider>
   )
