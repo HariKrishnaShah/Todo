@@ -6,7 +6,7 @@ export default function TaskStates(props) {
     const authToken = localStorage.getItem('token');
     const[toast, setToast] = useState();
     const[tasks, setTasks] = useState();
-    const[loading, setLoading] = useState(true);
+    const[loading, setLoading] = useState(false);
     const payload = {headers:{"authToken":authToken, "Content-Type": "application/json"}}
 
     
