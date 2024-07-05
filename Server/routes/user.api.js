@@ -11,16 +11,16 @@ try{
     router.post("/createuser", [ 
       body('name', "Enter a valid name").isLength({min:3}),
       body('email', "Enter a valid mail").isEmail(),
-      body('password', "Password must be atleast 3 characters").isLength({min:3}),
+      body('password', "Password must be atleast 3 characters").isLength({min:5}),
   ], async(req, res)=>{
         const result = validationResult(req); 
         console.log("Error result is " + result);
         if(result.isEmpty()){
             //Checking if user already exists
-             let user = await User.findOne({email:req.body.email});
+             let user = await User.findOne({email:req.body.email.toLowerCase()});
         if(user)
         {
-        return res.status(400).json({success:false, error:"Sorry ! an user already exists with that email. Enter another email and try again."});
+        return await res.status(400).json({success:false, message:"Sorry ! an user already exists with that email. Enter another email and try again."});
         }
             var salt = await bcrypt.genSalt();
             const secret_password = await bcrypt.hash(req.body.password, salt);
@@ -28,14 +28,14 @@ try{
             user = await User.create({
                 name:req.body.name,
                 password:secret_password,
-                email:req.body.email,
+                email:req.body.email.toLowerCase(),
             })
             const userdata = {user:{id:user.id}};
             success = true;
             const authToken = jwt.sign(userdata, jwtSecretKey);
             return res.json({"success": true, "authtoken": authToken, "userdetails": user})
         }
-        res.send({ errors: result.array() });
+        return res.status(500).send({success:false, errors: result.array() });
     })
 
 
@@ -53,7 +53,7 @@ router.post('/login',[
       const {email, password} = req.body;
       try
       {
-        let user = await User.findOne({email:email})
+        let user = await User.findOne({email:email.toLowerCase()})
         if(!user)
         {
           return res.status(400).json({"success":false, error:"Please try again with correct credentials."});

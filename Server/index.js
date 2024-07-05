@@ -1,9 +1,10 @@
+require("dotenv").config();
 const db = require("./db.js")
 db.connectToDB();
 const express = require("express");
 const app = express();
 var cors = require('cors');
-const port = 4000; 
+const port = process.env.port; 
 app.use("/", require("./routes/index.js"));
 const userapi = require("./routes/user.api.js");
 const taskapi = require("./routes/task.api.js")

@@ -13,7 +13,7 @@ export default function Navbar() {
 
   return (
     <div>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-green" style={{ background: 'linear-gradient(315deg, #5abe76 0%, #06247c 100%)' }}>
     <div className="container-fluid">
       <Link className="navbar-brand" to="/maintask">TODO App</Link>
         {localStorage.getItem('token') === null?

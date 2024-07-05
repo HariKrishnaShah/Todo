@@ -1,0 +1,69 @@
+/* Signup.css */
+
+/* Container styles */
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #5abe76 0%, #06247c 100%);
+  }
+  
+  /* Card styles for the signup form */
+  .signup-card {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #ffffff; /* Background color for the card */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for a slight elevation */
+  }
+  
+  /* Title style */
+  .signup-title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333333; /* Text color for the title */
+  }
+  
+  /* Form styles */
+  .signup-form .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .signup-form .form-label {
+    font-weight: bold;
+    color: #555555; /* Text color for labels */
+  }
+  
+  .signup-form .form-control {
+    padding: 10px;
+    border: 1px solid #cccccc; /* Border color for input fields */
+    border-radius: 4px;
+  }
+  
+  .signup-form .input-icon {
+    margin-right: 10px;
+  }
+  
+  /* Button styles */
+  .signup-form button[type="submit"] {
+    padding: 10px;
+    background-color: #007bff; /* Primary button background color */
+    color: #ffffff; /* Button text color */
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .signup-form button[type="submit"]:hover {
+    background-color: #0056b3; /* Darker shade of primary color on hover */
+  }
+  
+  /* Form text styles */
+  .signup-form .form-text {
+    color: #888888; /* Text color for form helper text */
+    font-size: 14px;
+  }
+  

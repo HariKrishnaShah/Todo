@@ -36,7 +36,7 @@ function MainTask() {
 
   return (
     <>
-    <div id = "goforshow" style ={{display:"none"}}><h4><strong><center>Login first to continue. Redirecting to Login Page 1 sec</center></strong></h4></div>
+    <div id = "goforshow" style ={{display:"none"}}><h4><strong><center>Login first to continue. Redirecting to Login Page in 1 sec</center></strong></h4></div>
     <div id = "goforhide" style ={{display:"none"}}>
     {localStorage.getItem('token') && 
     <Container className='text-center'>
