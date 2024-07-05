@@ -36,9 +36,12 @@ function EachTask({task, index, taskid, taskindex}) {
   return (
     <Accordion.Item eventKey={index.toString()}>
             <Accordion.Header>
-              <div className=''>
-              <div><input  id = "status" type = "checkbox" checked = {done} onChange={(e)=>{handlechange(e)}} style = {{width:"16px", height:"16px", marginRight:"10px"}}/><strong style={{fontSize:"16px"}}>{task.title || "Task Title"}</strong></div>
-              <div style = {{position:"absolute", left:"40%", top:"40%"}}><TaskCounter subtasks={task.subtasks} /></div>
+              <div className='' style={{width:'100%', display:'flex', flexDirection:'row', justifyContent:'space-between'}}>
+              <div>
+                <input  id = "status" type = "checkbox" checked = {done} onChange={(e)=>{handlechange(e)}} style = {{width:"16px", height:"16px", marginRight:"10px", wordBreak:"break-all"}}/>
+                <strong style={{fontSize:"16px", wordBreak:"break-all"}}>{task.title || "Task Title"}</strong>
+                </div>
+              <div ><TaskCounter subtasks={task.subtasks} /></div>
               </div>
               </Accordion.Header>
             <Accordion.Body>
